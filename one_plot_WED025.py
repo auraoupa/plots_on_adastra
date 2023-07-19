@@ -12,16 +12,19 @@ import cmocean
 import dask
 
 ds=xr.open_dataset('/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2rk3/DCMTOOLS/NEMOREF/NEMO4/cfgs/WED025_TEST/EXP00/WED025_5d_20000101_20000130_grid_T.nc')
-mask=xr.open_dataset('/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2rk3/DCMTOOLS/NEMOREF/NEMO4/cfgs/WED025_TEST/EXP00/coordinates_WED025.nc')
+mask=xr.open_dataset('/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2rk3/DCMTOOLS/NEMOREF/NEMO4/cfgs/WED025_TEST/EXP00/mesh_mask_merg.nc')
 
 tt=0
 data=ds.tos[tt]
-lon=mask.glamt
-lat=mask.gphit
+lon=mask.glamt[0]
+lat=mask.gphit[0]
+tmask=mask.tmaskutil
+datam=np.ma.array(data,mask=1-tmask)
 
 projection=ccrs.Orthographic(central_latitude=-70.0, central_longitude=-40.0)
 fig, ax = plt.subplots(subplot_kw=dict(projection=projection), figsize=(10,9))
-ax.set_global()
+#ax.set_global()
+#ax.set_extent([-150, -20, -90, 90], crs=ccrs.PlateCarree())
 
 #-- add coastal outlines
 #ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=0.5)
@@ -35,7 +38,7 @@ gl.right_labels = False
 gl.bottom_labels   = False
 gl.left_labels = False
 
-cnf1  = ax.pcolormesh(lon, lat, data,
+cnf1  = ax.pcolormesh(lon, lat, datam,
                           cmap=cmocean.cm.thermal,
                           vmin=-2,
                           vmax=5,
