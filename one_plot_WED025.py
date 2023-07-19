@@ -21,7 +21,8 @@ lat=mask.gphit[0]
 tmask=mask.tmaskutil
 datam=np.ma.array(data,mask=1-tmask)
 
-projection=ccrs.Orthographic(central_latitude=-70.0, central_longitude=-40.0)
+#projection=ccrs.Orthographic(central_latitude=-70.0, central_longitude=-40.0)
+projection=ccrs.PlateCarree()
 fig, ax = plt.subplots(subplot_kw=dict(projection=projection), figsize=(10,9))
 #ax.set_global()
 #ax.set_extent([-150, -20, -90, 90], crs=ccrs.PlateCarree())
