@@ -35,10 +35,10 @@ ax.set_extent([-90, 10, -90, -60], crs=ccrs.PlateCarree())
 gl = ax.gridlines(draw_labels=True, linewidth=0.5, color='k', zorder=3)
 #gl.xlabel_style = {'size':10}
 #gl.ylabel_style = {'size':10}
-gl.top_labels   = False
-gl.right_labels = False
+gl.top_labels   = True
+gl.right_labels = True
 gl.bottom_labels   = False
-gl.left_labels = False
+gl.left_labels = True
 
 cnf1  = ax.pcolormesh(lon, lat, datam,
                           cmap=cmocean.cm.thermal,
@@ -46,5 +46,5 @@ cnf1  = ax.pcolormesh(lon, lat, datam,
                           vmax=5,
 #                          shading='flat',
                           transform=ccrs.PlateCarree())
-
+fig.colorbar(cnf1)
 plt.savefig('plot_tos_WED025.png',bbox_inches='tight')
