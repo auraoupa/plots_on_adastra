@@ -1,0 +1,45 @@
+import numpy as np
+import xarray as xr
+
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import cartopy.util as cutil
+
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+import cmocean
+import dask
+
+ds=xr.open_dataset('/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2rk3/DCMTOOLS/NEMOREF/NEMO4/cfgs/WED025_TEST/EXP00/WED025_5d_20000101_20000130_grid_T.nc')
+mask=xr.open_dataset('/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2rk3/DCMTOOLS/NEMOREF/NEMO4/cfgs/WED025_TEST/EXP00/coordinates_WED025.nc')
+
+tt=0
+data=ds.tos[tt]
+lon=mask.glamt
+lat=mask.gphit
+
+projection=ccrs.Orthographic(central_latitude=-70.0, central_longitude=-40.0)
+fig, ax = plt.subplots(subplot_kw=dict(projection=projection), figsize=(10,9))
+ax.set_global()
+
+#-- add coastal outlines
+#ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=0.5)
+#ax.background_img(name='BM', resolution='low')
+
+gl = ax.gridlines(draw_labels=True, linewidth=0.5, color='k', zorder=3)
+#gl.xlabel_style = {'size':10}
+#gl.ylabel_style = {'size':10}
+gl.top_labels   = False
+gl.right_labels = False
+gl.bottom_labels   = False
+gl.left_labels = False
+
+cnf1  = ax.pcolormesh(lon, lat, data,
+                          cmap=cmocean.cm.thermal,
+                          vmin=-2,
+                          vmax=5,
+#                          shading='flat',
+                          transform=ccrs.PlateCarree())
+
+plt.savefig('plot_tos_WED025.png',bbox_inches='tight')
