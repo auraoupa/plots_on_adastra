@@ -39,7 +39,7 @@ gl.top_labels   = True
 gl.right_labels = True
 gl.bottom_labels   = False
 gl.left_labels = True
-ax.set_title('WED025 surface temperature t='+str(tt))
+#ax.set_title('WED025 surface temperature at t='+str(tt))
 
 cnf1  = ax.pcolormesh(lon, lat, datam,
                           cmap=cmocean.cm.thermal,
@@ -49,4 +49,4 @@ cnf1  = ax.pcolormesh(lon, lat, datam,
                           transform=ccrs.PlateCarree())
 fig.colorbar(cnf1,shrink=0.8)
 
-plt.savefig('plot_tos_WED025.png',bbox_inches='tight')
+plt.savefig('plot_tos_WED025.png')
