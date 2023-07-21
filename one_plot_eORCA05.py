@@ -1,12 +1,16 @@
 import numpy as np
+import numpy.ma as ma
+
 import xarray as xr
 
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import cartopy.util as cutil
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.ticker as mticker
 
 import cmocean
 import dask
@@ -72,11 +76,11 @@ def one_plot_surf(fig, sub, filein, filemask, var, lev, ttime, proj, reg, cmap, 
     gl.yformatter = LATITUDE_FORMATTER
     gl.xlabel_style = {'size': 15, 'color': 'gray'}
     gl.ylabel_style = {'size': 15, 'color': 'gray'}
-    gl.xlabels_top = False
-    gl.ylabels_left = False
+    gl.top_labels = False
+    gl.left_labels = False
 
     cbar = plt.colorbar(pcolor,orientation='horizontal',shrink=0.75,label=unit)
     ax.set_title(title,size=17,y=1.08)
 
 
-plt.savefig('plot_tos_WED025.png')
+plt.savefig('plot_sst_eORCA05.png')
