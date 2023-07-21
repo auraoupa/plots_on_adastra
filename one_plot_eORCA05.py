@@ -31,7 +31,7 @@ plotname ='plots/map_temp_eORCA05.L121-AGDA004_lev'+str(lev)+'_time'+str(ttime)+
 fig = plt.figure(figsize=(15,15))
 sub = 111
 
-def one_plot_surf(fig, sub, filein, filemask, var, lev, ttime, proj, reg, cmap, vmin, vmax, title):
+def one_plot_surf(fig, sub, filein, filemask, var, lev, ttime, proj, reg, cmap, vmin, vmax):
 
     ds=xr.open_dataset(filein)
     mask=xr.open_dataset(filemask)
@@ -78,5 +78,5 @@ def one_plot_surf(fig, sub, filein, filemask, var, lev, ttime, proj, reg, cmap, 
     cbar = plt.colorbar(pcolor,orientation='vertical',fraction=0.026, pad=0.1,label=unit)
     ax.set_title(title,size=17,y=1.08)
 
-
+one_plot_surf(fig, sub, filein, filemask, var, lev, ttime, proj, reg, cmap, vmin, vmax)
 plt.savefig(plotname)
