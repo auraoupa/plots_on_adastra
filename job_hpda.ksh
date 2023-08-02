@@ -15,4 +15,4 @@ load_conda
 conda activate plots
 
 cd /lus/work/NAT/gda2307/aalbert/DEV/git/plots_on_adastra
-python plots_2D_eORCA36.py
+python init_abort_eORCA36_temp-salt_sections.py
