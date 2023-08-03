@@ -35,23 +35,23 @@ def get_data2D(filei,var,ttime,lev):
         data=ds[var][ttime,lev].squeeze()
     return data
 
-filein = '/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2.1/DCMTOOLS/NEMOREF/NEMO4/cfgs/eORCA36.L121-AAA001/EXP00/output.init.nc'
+filein = '/lus/work/NAT/gda2307/aalbert/DEV/DCM_4.2.1/DCMTOOLS/NEMOREF/NEMO4/cfgs/eORCA36.L121-AAA001/EXP00/output.abort_merg.nc'
 filemask = '/lus/work/NAT/gda2307/aalbert/eORCA36.L121/eORCA36.L121-I/eORCA36.L121-MAA2023_mesh_mask_v4_4.2.nc'
 
 dsmask=xr.open_dataset(filemask)
 navlev=dsmask['nav_lev']
 
 fig = plt.figure(figsize=(30,100))
-plotname ='plots/all_maps_init_abort_eORCA36.png'
+plotname ='plots/all_maps_output_abort_eORCA36.png'
 
 dep=0
 lev=np.where(np.abs(navlev-dep)==np.min(np.abs(navlev-dep)))[0]
 
 tmask0=dsmask['tmask'][0,lev]
 temp0=get_data2D(filein,'votemper',0,lev)
-one_map_noproj(fig, 8,2,1,  temp0,   '°C', tmask0, cmocean.cm.thermal, -5, 30, 'init abort sea surface temperature eORCA36 ');
+one_map_noproj(fig, 8,2,1,  temp0,   '°C', tmask0, cmocean.cm.thermal, -5, 30, 'output abort sea surface temperature eORCA36 ');
 salt0=get_data2D(filein,'vosaline',0,lev)
-one_map_noproj(fig, 8,2,2,  salt0,   'PSI', tmask0, cmocean.cm.haline, 30, 35, 'init abort sea surface salinity eORCA36 ');
+one_map_noproj(fig, 8,2,2,  salt0,   'PSI', tmask0, cmocean.cm.haline, 30, 35, 'output abort sea surface salinity eORCA36 ');
 ssh=get_data2D(filein,'sossheig',0,-1)
 one_map_noproj(fig, 8,2,3,  ssh,   'm', tmask0, 'tab20c', -0.15, -0.1, 'init sea surface height eORCA36 ');
 flx1=get_data2D(filein,'sowaflup',0,-1)
@@ -71,25 +71,25 @@ dep=100
 lev=np.where(np.abs(navlev-dep)==np.min(np.abs(navlev-dep)))[0]
 tmask100=dsmask['tmask'][0,lev]
 temp100=get_data2D(filein,'votemper',0,lev)
-one_map_noproj(fig, 8,2,11,  temp100,   '°C', tmask100, cmocean.cm.thermal, -5, 30, 'init abort temperature eORCA36 100m');
+one_map_noproj(fig, 8,2,11,  temp100,   '°C', tmask100, cmocean.cm.thermal, -5, 30, 'output abort temperature eORCA36 100m');
 salt100=get_data2D(filein,'vosaline',0,lev)
-one_map_noproj(fig, 8,2,12,  salt100,   'PSI', tmask100, cmocean.cm.haline, 30, 35, 'init abort salinity eORCA36 100m');
+one_map_noproj(fig, 8,2,12,  salt100,   'PSI', tmask100, cmocean.cm.haline, 30, 35, 'output abort salinity eORCA36 100m');
 
 dep=500
 lev=np.where(np.abs(navlev-dep)==np.min(np.abs(navlev-dep)))[0]
 tmask500=dsmask['tmask'][0,lev]
 temp500=get_data2D(filein,'votemper',0,lev)
-one_map_noproj(fig, 8,2,13,  temp500,   '°C', tmask500, cmocean.cm.thermal, -5, 30, 'init abort temperature eORCA36 500m');
+one_map_noproj(fig, 8,2,13,  temp500,   '°C', tmask500, cmocean.cm.thermal, -5, 30, 'output abort temperature eORCA36 500m');
 salt500=get_data2D(filein,'vosaline',0,lev)
-one_map_noproj(fig, 8,2,14,  salt500,   'PSI', tmask500, cmocean.cm.haline, 30, 35, 'init abort salinity eORCA36 500m');
+one_map_noproj(fig, 8,2,14,  salt500,   'PSI', tmask500, cmocean.cm.haline, 30, 35, 'output abort salinity eORCA36 500m');
 
 dep=1000
 lev=np.where(np.abs(navlev-dep)==np.min(np.abs(navlev-dep)))[0]
 tmask1000=dsmask['tmask'][0,lev]
 temp1000=get_data2D(filein,'votemper',0,lev)
-one_map_noproj(fig, 8,2,15,  temp1000,   '°C', tmask1000, cmocean.cm.thermal, -5, 30, 'init abort temperature eORCA36 1000m');
+one_map_noproj(fig, 8,2,15,  temp1000,   '°C', tmask1000, cmocean.cm.thermal, -5, 30, 'output abort temperature eORCA36 1000m');
 salt1000=get_data2D(filein,'vosaline',0,lev)
-one_map_noproj(fig, 8,2,16,  salt1000,   'PSI', tmask1000, cmocean.cm.haline, 30, 35, 'init abort salinity eORCA36 1000m');
+one_map_noproj(fig, 8,2,16,  salt1000,   'PSI', tmask1000, cmocean.cm.haline, 30, 35, 'output abort salinity eORCA36 1000m');
 
 plt.savefig(plotname)
 
